@@ -1,40 +1,32 @@
 package br.com.alelo.repository.custom;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.alelo.domain.Book;
+import br.com.alelo.controller.dto.BookByCategoriesDTO;
 
 @Repository
 public class BookRepositoryImpl implements BookRepositoryCustom {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-    
-    @Override
-    public Book findByName( String name ) {
-        
-        Query query = null;
+	@PersistenceContext
+	private EntityManager entityManager;
 
-        StringBuilder sql = new StringBuilder();
-        
-        sql.append( "SELECT * " )
-        .append( "FROM BOOK " )
-        .append( "WHERE UPPER(NAME) = :name" );
-        
-        query = entityManager.createNativeQuery(sql.toString(), Book.class);
-        
-        query.setParameter( "name", name.toUpperCase() );
-        
-        try {
-            return (Book) query.getSingleResult();
-        } catch(NoResultException e) {
-            return null;
-        }
-    }
+	@Override
+	public List<BookByCategoriesDTO> buscaCategorias() {
+
+		StringBuilder sql = new StringBuilder();
+			sql.append(" SELECT new br.com.alelo.controller.dto.BookByCategoriesDTO( b.category, count(b.id))")
+				.append(" FROM Book AS b")
+				.append(" GROUP BY b.category");
+
+		List<BookByCategoriesDTO> list = entityManager.createQuery(sql.toString(), BookByCategoriesDTO.class)
+				.getResultList();
+
+		return list;
+	}
 
 }

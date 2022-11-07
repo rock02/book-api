@@ -16,10 +16,16 @@ public class BookResponse implements Serializable {
 
     private Long id;
     
-    private String name;
+    private String title;
     
     private String author;
     
-    private String ageGroup;
+    private String category;
+    
+    private String publishingCompany;
+    
+    private Integer rating;
+    
+    private String sumaryPath;
     
 }

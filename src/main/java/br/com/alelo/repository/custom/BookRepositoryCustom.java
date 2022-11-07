@@ -1,8 +1,11 @@
 package br.com.alelo.repository.custom;
 
-import br.com.alelo.domain.Book;
+import java.util.List;
+
+import br.com.alelo.controller.dto.BookByCategoriesDTO;
 
 public interface BookRepositoryCustom {
 
-    Book findByName(String name);
+	List<BookByCategoriesDTO> buscaCategorias();
+
 }

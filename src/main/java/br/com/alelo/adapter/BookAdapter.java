@@ -5,29 +5,37 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import br.com.alelo.controller.dto.BookByCategoriesDTO;
 import br.com.alelo.controller.dto.BookDTO;
 import br.com.alelo.domain.Book;
+import br.com.alelo.response.BookByCategoriesResponse;
 import br.com.alelo.response.BookResponse;
 
 @Component
 public class BookAdapter {
 
     public Book bookDtoToEntity( BookDTO bookDTO ) {
-
-        return Book.builder()
-                .name( bookDTO.getName() )
-                .author( bookDTO.getAuthor() )
-                .ageGoup( bookDTO.getAgeGroupEnum().name() )
-                .build();
+    	
+         Book book = new Book();
+         book.setAuthor( bookDTO.getAuthor() );
+         book.setTitle( bookDTO.getTitle() );
+         book.setPublishingCompany( bookDTO.getPublishingCompany() );
+         book.setCategory( bookDTO.getCategory().getCategory() );
+         book.setRating( bookDTO.getRating() );
+         
+         return book;
     }
 
     public BookResponse bookEntityToDto( Book book ) {
 
         return BookResponse.builder()
                 .id( book.getId() )
-                .name( book.getName() )
+                .title( book.getTitle() )
                 .author( book.getAuthor() )
-                .ageGroup( book.getAgeGoup() )
+                .category( book.getCategory() )
+                .publishingCompany( book.getPublishingCompany() )
+                .rating( book.getRating() )
+                .sumaryPath( book.getSumaryPath() )
                 .build();
     }
     
@@ -42,8 +50,12 @@ public class BookAdapter {
         books.forEach( book -> {
             BookResponse bookDto = BookResponse.builder()
                     .id( book.getId() )
-                    .name( book.getName() )
+                    .title( book.getTitle() )
                     .author( book.getAuthor() )
+                    .publishingCompany( book.getPublishingCompany() )
+                    .category( book.getCategory() )
+                    .sumaryPath( book.getSumaryPath() )
+                    .rating( book.getRating() )
                     .build();
 
             listBooksResponse.add( bookDto );
@@ -52,23 +64,24 @@ public class BookAdapter {
         return listBooksResponse;
     }
     
-    public static List<Book> bookDtoToEntityForList( List<BookDTO> booksDTO ) {
-        
-        List<Book> listBooksEntity = new ArrayList<>();
-        
-        if (booksDTO == null) {
-            return listBooksEntity;
+    
+    public static List<BookByCategoriesResponse> booksEntityToCategoriesForList( List<BookByCategoriesDTO> listBookByCategories ) {
+
+        List<BookByCategoriesResponse> listBookByCategoriesResponse = new ArrayList<>();
+
+        if (listBookByCategories == null) {
+            return listBookByCategoriesResponse;
         }
-        
-        booksDTO.forEach( book -> {
-            Book bookDto = Book.builder()
-                    .name( book.getName() )
-                    .author( book.getAuthor() )
+
+        listBookByCategories.forEach( book -> {
+            BookByCategoriesResponse bookDto = BookByCategoriesResponse.builder()
+                    .category( book.getCategory() )
+                    .quantity( book.getQuantity())
                     .build();
-            
-            listBooksEntity.add( bookDto );
+
+            listBookByCategoriesResponse.add( bookDto );
         } );
-        
-        return listBooksEntity;
+
+        return listBookByCategoriesResponse;
     }
 }

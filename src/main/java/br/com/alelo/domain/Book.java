@@ -1,5 +1,7 @@
 package br.com.alelo.domain;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,11 +20,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Book {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String author;
-    @Column(name = "AGE_GROUP")
-    private String ageGoup;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String title;
+	private String author;
+	private String category;
+	@Column(name = "publishingcompany")
+	private String publishingCompany;
+	private String uuid = UUID.randomUUID().toString();
+	private Integer rating;
+	@Column(name = "sumarypath")
+	private String sumaryPath;
+
 }
