@@ -2,8 +2,6 @@ package br.com.alelo.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +41,7 @@ public interface BookDefinition {
             @ApiResponse(code = 400, message = "Bad request"),
             @ApiResponse(code = 500, message = "Internal server error") })
     @RequestMapping(method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    ResponseEntity<BookResponse> create( @Valid @ModelAttribute BookDTO bookDTO );
+    ResponseEntity<BookResponse> create( @Validated @ModelAttribute BookDTO bookDTO );
     
     @ApiOperation(value = "update", nickname = "update", notes = "update book")
     @ApiResponses(value = {
@@ -52,7 +50,7 @@ public interface BookDefinition {
             @ApiResponse(code = 404, message = "Not fount"),
             @ApiResponse(code = 500, message = "Internal server error") })
     @PatchMapping(value = "/{id}")
-    ResponseEntity<BookResponse> update( @PathVariable @Validated Long id, @Valid @RequestBody @ApiParam( name = "book", required = true ) BookDTO bookDTO );
+    ResponseEntity<BookResponse> update( @PathVariable @Validated Long id, @Validated @RequestBody @ApiParam( name = "book", required = true ) BookDTO bookDTO );
 
     @ApiOperation(value = "getBook", nickname = "getBook", notes = "get Book")
     @ApiResponses(value = {

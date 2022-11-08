@@ -9,8 +9,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.4.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>2.7.5</version>
+		<relativePath />
 	</parent>
 
 	<properties>
@@ -54,17 +54,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<scope>test</scope>
-		</dependency>
 		
-		<!-- <dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
-   -->
 	   	<dependency>
 	      	<groupId>mysql</groupId>
 	       	<artifactId>mysql-connector-java</artifactId>
@@ -72,10 +62,11 @@
 	    </dependency>
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-			<scope>provided</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <optional>true</optional>
+            <scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -117,143 +108,40 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		
-		<!-- integration-test -->
-        <!-- cucumber -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-spring</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>de.monochromata.cucumber</groupId>
-			<artifactId>reporting-plugin</artifactId>
-			<version>${reporting.monochromata}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<!-- rest-assured -->
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>spring-web-test-client</artifactId>
-			<version>${restassured.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>${restassured.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>json-path</artifactId>
-			<version>${restassured.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>xml-path</artifactId>
-			<version>${restassured.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>json-schema-validator</artifactId>
-			<version>${restassured.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.javafaker</groupId>
-			<artifactId>javafaker</artifactId>
-			<version>${github.javafaker}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 		<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.13</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws-context -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-aws-context</artifactId>
 		    <version>2.2.6.RELEASE</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
 		<dependency>
 		    <groupId>org.hibernate.javax.persistence</groupId>
 		    <artifactId>hibernate-jpa-2.0-api</artifactId>
 		    <version>1.0.1.Final</version>
-		</dependency>
+		</dependency>	
 		
 		<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
-<!-- 		<dependency>
+		<dependency>
 		    <groupId>javax.persistence</groupId>
 		    <artifactId>javax.persistence-api</artifactId>
 		    <version>2.2</version>
-		</dependency> -->
-		
+		</dependency>	
 		
 	</dependencies>
 
 	<build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
+        <finalName>${project.artifactId}:${project.version}</finalName>
+        <plugins>      	
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-    			<groupId>org.apache.maven.plugins</groupId>
-    			<artifactId>maven-failsafe-plugin</artifactId>
-    			<version>${maven.failsafe}</version>
-    			<configuration>
-	                <includes>
-	                    <include>**/*IT.java</include>
-	                </includes>
-	                <skipTests>${skipIntegrationTests}</skipTests>
-	            </configuration>
-    			<executions>
-			        <execution>
-			            <phase>integration-test</phase>
-			            <goals>
-			                <goal>integration-test</goal>
-			            </goals>
-			        </execution>
-	        		<execution>
-			            <id>failsafe-verify</id>
-			            <phase>verify</phase>
-			            <goals>
-			                <goal>verify</goal>
-			            </goals>
-	        		</execution>
-    			</executions>
-			</plugin>          
+            </plugin>                   
         </plugins>
     </build>
 </project>

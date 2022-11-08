@@ -2,12 +2,10 @@ package br.com.alelo.controller.dto;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.alelo.enums.CategoryEnum;
@@ -25,22 +23,15 @@ public class BookDTO implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    @NotNull(message = "cannot be null")
-    @Length( max = 50, message = "{invalid.title}" )
+    @Nonnull
     private String title;
-
-    @NotNull(message = "cannot be null")
-    @NotEmpty(message = "cannot be empty")
-    @Length( max = 50, message = "{invalid.author}" )
+    @Nonnull
     private String author;  
-    
-    @NotNull(message = "cannot be null")
-    @NotEmpty(message = "cannot be empty")
-    @Length( max = 50, message = "{invalid.publishingCompany}" )
+    @Nonnull
     private String publishingCompany;
     
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "cannot be null")
+    @Nonnull
     @ApiModelProperty(value = "category", required = true)
     private CategoryEnum category;
     
