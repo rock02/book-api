@@ -8,7 +8,4 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 
     Book findByTitle( String title);
     
-//    @Query(nativeQuery = true)
-//    List<BookByCategoriesDTO> findCategory_count();
-    
 }
