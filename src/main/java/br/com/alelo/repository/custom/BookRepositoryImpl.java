@@ -19,8 +19,8 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	public List<BookByCategoriesDTO> buscaCategorias() {
 
 		StringBuilder sql = new StringBuilder();
-			sql.append(" SELECT new br.com.alelo.controller.dto.BookByCategoriesDTO( b.category, count(b.id))")
-				.append(" FROM Book AS b")
+			sql.append(" SELECT b.category, count(b.id) as quantity")
+				.append(" FROM books AS b")
 				.append(" GROUP BY b.category");
 
 		List<BookByCategoriesDTO> list = entityManager.createQuery(sql.toString(), BookByCategoriesDTO.class)

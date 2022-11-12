@@ -1,0 +1,3 @@
+INSERT INTO books(title, author, category, publishingcompany, uuid, rating, sumarypath ) VALUES('O Exorcista', 'William Petter', 'Terror', 'Editora 1', '764834883', 5, 'https://bookwebangular-feliperoque.s3.us-east-2.amazonaws.com/764834883.jpeg');
+INSERT INTO books(title, author, category, publishingcompany, uuid, rating, sumarypath) VALUES('As Aventuras de Pi', 'Yahn Martel', 'Aventura', 'Editora 2', '2817817121212', 5, 'https://bookwebangular-feliperoque.s3.us-east-2.amazonaws.com/2817817121212.jpeg');
+INSERT INTO books(title, author, category, publishingcompany, uuid, rating, sumarypath) VALUES('Ativamente', 'Bechelli', 'Aventura', 'Editora 3', '764834883', 4, 'https://bookwebangular-feliperoque.s3.us-east-2.amazonaws.com/764834883.jpeg');
